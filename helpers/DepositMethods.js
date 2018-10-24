@@ -36,5 +36,14 @@ module.exports = {
 		}
 		// partyDeposit = await deposit.viewCurrentDeposit.call(party);
 		return partyDeposit;
+	},
+	async getCurrentStage() {
+		if (typeOfRun == constants.UsingOriginalTruffle) {
+			currentState = await deposit.state.call();
+			currentStage = currentState[1].toNumber();//stage, fron BigNumber
+		} else {
+			assert(false, 'not yet implemented')
+		}
+		return currentStage;
 	}
 }

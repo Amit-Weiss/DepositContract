@@ -118,14 +118,9 @@ contract("DepositFactory", accounts => {
 		});
 
 		it('sets correct initial values for the state', async () => {
-			const initialInitialState = await deposit.state.call();
-			const initialStage = initialInitialState['stage'];
+			const initialStage = await depositHelper.getCurrentStage();
 			assert.equal(initialStage, constants.NoCounterpart, 'Stage should be 1 after constructor!');
 			//Note that the mappings in state are not checked directly
-			// const initialCurrentDeposits = await deposit.
-			// 	.viewCurrentDeposit()
-			// 	.call();
-			// [initiatorCurrentDeposit, counterpartCurrentDeposit] = initialCurrentDeposits;
 			initiatorCurrentDeposit = await depositHelper.viewCurrentDeposit(initiator);
 			counterpartCurrentDeposit = await depositHelper.viewCurrentDeposit(counterpart);
 			assert.equal(initiatorCurrentDeposit,	INIT_VALUE,
